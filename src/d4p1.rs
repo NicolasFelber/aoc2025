@@ -21,10 +21,64 @@ fn solution(input: String) -> u64 {
 }
 
 fn check_x(i: usize, j: usize, vector: &Vec<Vec<char>>) -> u64 {
-    if i > 3 {
-        if 
+    let mut count = 0;
+    if i >= 3 {
+        if vector[i - 1][j] == 'M' && vector[i - 2][j] == 'A' && vector[i - 3][j] == 'S' {
+            count += 1;
+            println!["{} {} up", i, j];
+        }
+        if j >= 3
+            && vector[i - 1][j - 1] == 'M'
+            && vector[i - 2][j - 2] == 'A'
+            && vector[i - 3][j - 3] == 'S'
+        {
+            count += 1;
+            println!["{} {} up left", i, j];
+        }
+        if j < vector[0].len() - 3
+            && vector[i - 1][j + 1] == 'M'
+            && vector[i - 2][j + 2] == 'A'
+            && vector[i - 3][j + 3] == 'S'
+        {
+            count += 1;
+            println!["{} {} up right", i, j];
+        }
     }
-    0
+    if i < vector.len() - 3 {
+        if vector[i + 1][j] == 'M' && vector[i + 2][j] == 'A' && vector[i + 3][j] == 'S' {
+            count += 1;
+            println!["{} {} down", i, j];
+        }
+        if j >= 3
+            && vector[i + 1][j - 1] == 'M'
+            && vector[i + 2][j - 2] == 'A'
+            && vector[i + 3][j - 3] == 'S'
+        {
+            count += 1;
+            println!["{} {} down left", i, j];
+        }
+        if j < vector[i].len() - 3
+            && vector[i + 1][j + 1] == 'M'
+            && vector[i + 2][j + 2] == 'A'
+            && vector[i + 3][j + 3] == 'S'
+        {
+            count += 1;
+            println!["{} {} down right", i, j];
+        }
+    }
+    if j >= 3 && vector[i][j - 1] == 'M' && vector[i][j - 2] == 'A' && vector[i][j - 3] == 'S' {
+        count += 1;
+        println!["{} {} left", i, j];
+    }
+    if j < vector[i].len() - 3
+        && vector[i][j + 1] == 'M'
+        && vector[i][j + 2] == 'A'
+        && vector[i][j + 3] == 'S'
+    {
+        count += 1;
+        println!["{} {} right", i, j];
+    }
+    return count;
 }
 
 #[cfg(test)]
